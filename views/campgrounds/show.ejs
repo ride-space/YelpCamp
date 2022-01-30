@@ -7,8 +7,14 @@
   <title>キャンプ場の詳細ページ</title>
 </head>
 <body>
-  <h1>キャンプ場の詳細ページ</h1>
-  <h2><%= campground.title  %> </h2>
-  <h2><%= campground.location  %> </h2>
+  <h1><%= campground.title  %> </h1>
+  <p><%= campground.location  %> </p>
+  <p>
+    <a href="/campgrounds/<%= campground._id %>/edit ">編集する</a>
+  </p>
+  <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+    <button>削除</button>
+  </form>
+  <a href="/campgrounds">一覧に戻る</a>
 </body>
 </html>
