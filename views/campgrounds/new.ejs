@@ -3,7 +3,7 @@
 <div class="row">
   <h1 class="text-center">キャンプ場の新規登録</h1>
   <div class="offset-3 col-3">
-    <form action="/campgrounds" method="POST">
+    <form action="/campgrounds" method="POST" class="validated-form" novalidate>
       <!-- name="campground[title]"にすることでcampgroundの中のtitleにデータを渡すことになる -->
       <!-- {"campground":{"title":"テスト","location":"テスト"}}とdataがはいる -->
       <div class="mb-3">
@@ -13,7 +13,11 @@
           name="campground[title]"
           id="title"
           class="form-control"
+          required
         />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
       </div>
       <div class="mb-3">
         <label for="location" class="form-label">場所</label>
@@ -22,7 +26,11 @@
           name="campground[location]"
           id="location"
           class="form-control"
+          required
         />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
       </div>
       <div class="mb-3">
         <label for="image" class="form-label">画像URL</label>
@@ -31,21 +39,29 @@
           name="campground[image]"
           id="image"
           class="form-control"
+          required
         />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">価格</label>
         <div class="input-group mb-3">
           <span class="input-group-text" id="price-label">¥</span>
           <input
-            type="text"
+            type="number"
             id="price"
             class="form-control"
+            required
             placeholder="0"
             aria-label="価格"
             aria-describedby="price-label"
             name="campground[price]"
           />
+          <div class="valid-feedback">
+            Looks good!
+          </div>
         </div>
       </div>
       <div class="mb-3">
@@ -55,7 +71,11 @@
           name="campground[description]"
           id="description"
           class="form-control"
+          required
         ></textarea>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
       </div>
       <div class="mb-3">
         <button class="btn btn-success">登録する</button>
@@ -64,3 +84,27 @@
     <a href="/campgrounds">一覧に戻る</a>
   </div>
 </div>
+
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.validated-form')
+
+  // Loop over them and prevent submission
+  Array.from(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
