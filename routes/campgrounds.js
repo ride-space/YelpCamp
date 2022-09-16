@@ -63,6 +63,7 @@ router.put(
       { ...req.body.campground },
       { new: true }
     );
+    req.flash("success", "キャンプ場を更新しました。");
     res.redirect(`/campgrounds/${campground._id}`);
   })
 );
@@ -72,7 +73,7 @@ router.delete(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id);
-
+    req.flash("success", "キャンプ場を削除しました。");
     res.redirect("/campgrounds");
   })
 );
