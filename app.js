@@ -3,13 +3,9 @@ const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
-const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
-const Campground = require("./models/campground");
-const { campgroundSchema, reviewSchema } = require("./schemas");
-const Review = require("./models/review");
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
+const session = require('express-session')
+
 
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
@@ -35,6 +31,17 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extends: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+
+const sessionConfig = {
+  secret: 'mySecret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 *24 *7
+  }
+}
+app.use(session(sessionConfig))
 
 app.get("/", (req, res) => {
   res.render("home");
