@@ -9,6 +9,17 @@
         <a class="nav-link" href="/">ホーム</a>
         <a class="nav-link" href="/campgrounds">キャンプ場</a>
         <a class="nav-link" href="/campgrounds/new">新規登録</a>
+
+      </div>
+      <div class="navbar-nav ms-auto">
+        <% if(!currentUser){ %>
+        <a class="nav-link" href="/login">ログイン</a>
+        <a class="nav-link" href="/register">ユーザー登録</a>
+        <% }else{ %>
+        <form action="/logout" method="POST">
+          <button class="nav-link">ログアウト</button>
+        </form>
+        <% } %> 
       </div>
     </div>
   </div>
