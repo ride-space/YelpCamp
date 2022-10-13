@@ -3,7 +3,7 @@
 <div class="row">
   <h1 class="text-center">キャンプ場の新規登録</h1>
   <div class="offset-3 col-3">
-    <form action="/campgrounds" method="POST" class="validated-form" novalidate>
+    <form action="/campgrounds" method="POST" class="validated-form" enctype="multipart/form-data" novalidate>
       <!-- name="campground[title]"にすることでcampgroundの中のtitleにデータを渡すことになる -->
       <!-- {"campground":{"title":"テスト","location":"テスト"}}とdataがはいる -->
       <div class="mb-3">
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="image" class="form-label">画像URL</label>
+        <!-- <label for="image" class="form-label">画像URL</label>
         <input
           type="text"
           name="campground[image]"
@@ -43,7 +43,8 @@
         />
         <div class="valid-feedback">
           Looks good!
-        </div>
+        </div> -->
+        <input type="file" name="image" multiple id="">
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">価格</label>
