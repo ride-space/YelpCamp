@@ -57,6 +57,18 @@ module.exports.updateCampground = async (req, res) => {
     { ...req.body.campground },
     { new: true }
   );
+  const imgs = req.files.map((image) => ({
+    url: image.path,
+    filename: image.filename,
+  }));
+  campground.images.push(...imgs);
+  await campground.save();
+  // 画像を削除する処理 修正必須
+  if (req.body.deleteImages) {
+    await campground.updateOne({
+      $pull: { images: { filename: { $in: req.body.deleteImages } } },
+    });
+  }
   req.flash("success", "キャンプ場を更新しました。");
   res.redirect(`/campgrounds/${campground._id}`);
 };
