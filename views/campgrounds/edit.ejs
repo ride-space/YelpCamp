@@ -2,7 +2,7 @@
 <div class="row">
   <h1 class="text-center">キャンプ場の編集</h1>
   <div class="offset-3 col-3">
-    <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
+    <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate enctype="multipart/form-data">
       <!-- name="campground[title]"にすることでcampgroundの中のtitleにデータを渡すことになる -->
       <!-- {"campground":{"title":"テスト","location":"テスト"}}とdataがはいる -->
       <div class="mb-3">
@@ -26,14 +26,17 @@
         />
       </div>
       <div class="mb-3">
-        <label for="image" class="form-label">画像URL</label>
-        <input
-          type="text"
-          name="campground[image]"
-          id="image"
-          class="form-control"
-          value="<%= campground.image %>"
-        />
+        <label for="image" class="form-label">画像を追加</label>
+        <input class="form-control" name="image" type="file" id="image" multiple>
+      </div>
+      <div class="mb-3">
+        <% campground.images.forEach((img,index) =>{ %>
+          <img src="<%= img.thumbnail %> " class="img-thumbnail" alt="<%= img.filename%>">
+          <div class="form-check-inline">
+            <input type="checkbox" name="deleteImages[]" id="image-<%= index %>" value="<%= img.filename %> ">
+          </div>
+          <label for="image-<%= index %>">削除する</label>
+        <%}) %>
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">価格</label>
