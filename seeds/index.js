@@ -28,6 +28,13 @@ const seedDB = async () => {
       price: price,
       title: `${sample(descriptors)}・${sample(places)}`,
       description: '吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。',
+      geometry:{
+        type:'Point',
+        coordinates: [
+          cities[randomCityIndex].longitude,
+          cities[randomCityIndex].latitude,
+        ],
+      },
       images: [
         {
           url: 'https://res.cloudinary.com/dgfenrqxk/image/upload/v1665716633/YelpCamp/v77setuhekp1vorzk61z.jpg',
