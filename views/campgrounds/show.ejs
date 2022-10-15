@@ -70,6 +70,7 @@
     </div>
   </div>
   <div class="col-6">
+    <div id='map' style='width: 400px; height: 300px;'></div>
     <h2>レビュー</h2>
     <% if(currentUser){ %>
     <form
@@ -154,3 +155,11 @@
     <% } %>
   </div>
 </div>
+
+<script>
+  const mapToken ='<%= process.env.MAPBOX_TOKEN %>';
+  const campground ='<%- JSON.stringify(campground)  %>';
+</script>
+<script src="/javascript/showPageMap.js">
+
+  </script>
